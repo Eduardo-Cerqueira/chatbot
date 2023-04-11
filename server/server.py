@@ -1,14 +1,14 @@
-import socket
+import socket, json
 
 class user:
   def __init__(self, username, hostname):
     self.username = username
     self.hostname = hostname
 
-def server_program():
+def startServer(port):
     # get the hostname
     host = socket.gethostname()
-    port = 5000  # initiate port no above 1024
+    print(host)
 
     server_socket = socket.socket()  # get instance
     # look closely. The bind() function takes tuple as argument
@@ -24,17 +24,26 @@ def server_program():
         if not data:
             # if data is not received break
             break
-        print("from connected user: " + str(data))
+        print("from connected user: " + data)
+        print(data)
+        json_data = json.loads(data)
+        try:
+            checkUser(users, json_data["username"], json_data["hostname"])
+        except KeyError:
+            print("Message don't contain username")
         data = input(' -> ')
         conn.send(data.encode())  # send data to the client
 
     conn.close()  # close the connection
 
-def checkUser(users_array, username):
+def checkUser(users_array, username, hostname):
     for user in users_array:
         if (user.username == username):
             return print({'status': 500, 'err': 'Username already exists !'})
-    return print({'status': 200, 'err': "Username doesn't exist !"})
+    print({'status': 200, 'err': "Username doesn't exist !"})
+    addUser(users_array, username, hostname)
+    print(users_array[0].username)
+    return print({'status': 200, 'err': "Username created !"})
 
 
 def addUser(users_array, username, hostname):
@@ -49,4 +58,4 @@ def removeUser(users_array, username):
 
 if __name__ == '__main__':
     users = []
-    server_program()
+    startServer(5000)
