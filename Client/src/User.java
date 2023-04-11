@@ -1,22 +1,26 @@
+public class User {
+    String pseudo;
+    String address;
+    String port;
 
-class User {
-    private String pseudo;
-
-    public User(String pseudo) throws IllegalArgumentException {
-        if (pseudo.length() > 20) {
-            throw new IllegalArgumentException("Veuillez entrer un pseudo de moins de 20 caractères.");
-        }
+    public User(String pseudo,String address,String port) {
         this.pseudo = pseudo;
+        this.address = address;
+        this.port = port;
     }
 
     public String getPseudo() {
-        return pseudo;
+        return this.pseudo;
+    }
+    public String getAddress() {
+        return this.address;
+    }
+    public String getPort() {
+        return this.port;
     }
 
-    public void setPseudo(String pseudo) throws IllegalArgumentException {
-        if (pseudo.length() > 20) {
-            throw new IllegalArgumentException("Veuillez entrer un pseudo de moins de 20 caractères.");
-        }
-        this.pseudo = pseudo;
+    public static String toString(User user) {
+        String userString = "Name: " + user.getPseudo();
+        return userString;
     }
 }
