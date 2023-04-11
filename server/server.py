@@ -1,4 +1,5 @@
-import socket, json
+import socket, json, _thread, os
+from datetime import datetime
 
 class user:
   def __init__(self, username, hostname):
@@ -16,9 +17,17 @@ def startServer(port):
 
     # configure how many client the server can listen simultaneously
     server_socket.listen(2)
-    conn, address = server_socket.accept()  # accept new connection
-    print("Connection from: " + str(address))
+
+    last_adress = ""
+
     while True:
+        conn, address = server_socket.accept()
+        if (address != ""):
+            log_message("server/server.log", "Connection", address)
+            print("Connection from: " + str(address))
+            last_adress = address
+            address = ""
+
         # receive data stream. it won't accept data packet greater than 1024 bytes
         data = conn.recv(1024).decode()
         if not data:
@@ -31,10 +40,15 @@ def startServer(port):
             checkUser(users, json_data["username"], json_data["hostname"])
         except KeyError:
             print("Message don't contain username")
-        data = input(' -> ')
-        conn.send(data.encode())  # send data to the client
-
+        break
+        #data = input(' -> ')
+        #sendMessage(conn, data)  # send data to the client
+    log_message("server/server.log", "Disconnection", last_adress)
     conn.close()  # close the connection
+
+#Thread: https://docs.python.org/3/library/_thread.html
+def newThread(function):
+    thread.start_new_thread(function)
 
 def checkUser(users_array, username, hostname):
     for user in users_array:
@@ -56,6 +70,35 @@ def removeUser(users_array, username):
             return users_array.pop(i)
         i+=1
 
+def sendMessage(conn, data):
+    return conn.send(data.encode())
+
+## Logs
+def time():
+    #current time for logs
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y | %H:%M:%S")
+    return dt_string
+
+
+def log_message(path, message_log, address):
+    #Logs during server execution
+    with open(os.path.join(path), "a") as file_logs:
+        file_logs.write(f"{time()} - {address} : {message_log}\n")
+
+def log_file_manage(log_path):
+    #Create log file at start of main if doesn't exist
+    is_file = os.path.isfile(log_path)
+    if is_file is False:
+        with open(os.path.join(log_path), "x") as file_logs:
+            file_logs.write(f"{time()} : Server started\n")
+            file_logs.close()
+    else:
+        with open(os.path.join(log_path), "a") as file_logs:
+            file_logs.write(f"{time()} : Server started\n")
+            file_logs.close()
+
 if __name__ == '__main__':
     users = []
+    log_file_manage("server/server.log", )
     startServer(5000)
