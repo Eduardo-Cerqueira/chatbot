@@ -32,7 +32,7 @@ public final class App {
         } catch (ConnectException e) {
             System.out.println("Error : Serveur doesn't exist or is offline !");
         } catch (UnknownHostException e) {
-            System.out.println("Error : Serveur doesn't exist or is offline !");
+            System.out.println("Error : Wrong hostname !");
         }
     }
 }
