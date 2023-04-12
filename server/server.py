@@ -9,7 +9,7 @@ class user:
 def startServer(port):
     # get the hostname
     host = socket.gethostname()
-    print(host)
+    print("Server address is :",host)
 
     server_socket = socket.socket()  # get instance
     # look closely. The bind() function takes tuple as argument
