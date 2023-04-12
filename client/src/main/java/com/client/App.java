@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 import org.json.*;
 
@@ -29,6 +30,8 @@ public final class App {
             username_send.flush();
             s.close();
         } catch (ConnectException e) {
+            System.out.println("Error : Serveur doesn't exist or is offline !");
+        } catch (UnknownHostException e) {
             System.out.println("Error : Serveur doesn't exist or is offline !");
         }
     }
