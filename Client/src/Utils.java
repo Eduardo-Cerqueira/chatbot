@@ -1,10 +1,10 @@
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Scanner;
+import org.json.*;
 
 
 public class Utils {
@@ -67,6 +67,10 @@ public class Utils {
         }
     }
 
+    private static ArrayList<User> readUsersFromJson(String string) {
+        return null;
+    }
+
     public static void userConnected(User user) {
         System.out.println("User connected: " + user.getPseudo());
     }
@@ -74,12 +78,50 @@ public class Utils {
         System.out.println("User disconnected: " + user.getPseudo());
     }
 
-    public static ArrayList<User> readUsersFromJson(String filename) throws IOException {
+    /* public static ArrayList<User> readUsersFromJson(String filename) throws IOException {
         Gson gson = new Gson();
         FileReader reader = new FileReader(filename);
         Type userListType = new TypeToken<ArrayList<User>>(){}.getType();
         ArrayList<User> users = gson.fromJson(reader, userListType);
         reader.close();
         return users;
-    }
+        
+    } */
+    
+    /* public static ArrayList<User> readUsersFromJson(String filename) throws IOException, JSONException {
+        ArrayList<User> users = new ArrayList<>();
+        JSONTokener tokener = new JSONTokener(new FileReader(filename));
+        JSONArray jsonArray = new JSONArray(tokener);
+        
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            User user = new User();
+            user.setId(jsonObject.getInt("id"));
+            user.setName(jsonObject.getString("name"));
+            user.setAge(jsonObject.getInt("age"));
+            users.add(user);
+        }
+        
+        return users;
+    } */
+
+   /*  public static ArrayList<String> displayListUser(String nameUser, String idUser) throws IOException {
+        String message = ("msg : bonjour")
+        String[][] users = { {"user1", "4454564"}, {"user2","1561561651"} };
+        ArrayList<String> userList = new ArrayList<>();
+    
+        for(int i=0; i < users.length; i++){
+            userList.add(users[i][0]);
+       }
+
+       try {
+        
+       } catch (Exception e) {
+        // TODO: handle exception
+       }
+    
+       return userList;
+    } */
+    
+
 }
