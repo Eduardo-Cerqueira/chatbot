@@ -1,0 +1,32 @@
+[
+    {
+        "pseudo": "Bobby",
+        "address": "127.0.0.1",
+        "port": "5000"
+    },
+    {
+        "pseudo": "Jacqueline",
+        "address": "127.0.0.1",
+        "port": "5000"
+    },
+    {
+        "pseudo": "GabyDu80",
+        "address": "127.0.0.1",
+        "port": "5000"
+    },
+    {
+        "pseudo": "DarkTomi",
+        "address": "127.0.0.1",
+        "port": "5000"
+    },
+    {
+        "pseudo": "GamingMaster50",
+        "address": "127.0.0.1",
+        "port": "5000"
+    },
+    {
+        "pseudo": "SteveDu70",
+        "address": "127.0.0.1",
+        "port": "5000"
+    }
+]

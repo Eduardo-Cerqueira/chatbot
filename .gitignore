@@ -1,6 +1,6 @@
 # MacOS
 
-DS_Store
+*.DS_Store
 
 # Java
 
@@ -323,4 +323,3 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
-/client/target/

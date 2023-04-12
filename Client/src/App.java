@@ -1,17 +1,13 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        Utils.displayHome();
+    }
+    
+    public static Scanner getScanner(){
         Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Entrez votre pseudo : ");
-        String pseudo = scanner.nextLine();
-
-        try {
-            User user = new User(pseudo);
-            System.out.println("Votre pseudo est : " + user.getPseudo());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        return scanner;
     }
 }
