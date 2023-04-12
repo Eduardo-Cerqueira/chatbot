@@ -1,38 +1,37 @@
 package com.client;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ConnectException;
-import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Scanner;
-import org.json.*;
 
-public final class App {
+public final class App extends Thread {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter username : ");
-        String username = scanner.nextLine();
-        System.out.println("Enter hostname : ");
+        System.out.println("[-] Enter hostname : ");
         String hostnameserver = scanner.nextLine();
-        scanner.close();
         
-        JSONObject username_json = new JSONObject();
-        username_json.put("username", username);
-        String hostname = InetAddress.getLocalHost().getHostName();
-        username_json.put("hostname", hostname);
+        Socket client_socket = new Socket(hostnameserver, 5000);
+        PrintWriter out = new PrintWriter(client_socket.getOutputStream(), true);
+        BufferedReader in = new BufferedReader(new InputStreamReader(client_socket.getInputStream()));
+            
+        System.out.println("[+] Vous avez rejoint le Canal Public :");
+        String message;
 
-        try {
-            Socket s = new Socket(hostnameserver, 5000);
-            PrintWriter username_send = new PrintWriter(s.getOutputStream());
-            username_send.println(username_json);
-            username_send.flush();
-            s.close();
-        } catch (ConnectException e) {
-            System.out.println("Error : Serveur doesn't exist or is offline !");
-        } catch (UnknownHostException e) {
-            System.out.println("Error : Wrong hostname !");
+        while (true) {
+            System.out.println(in.readLine());
+            message = scanner.nextLine();
+            
+            out.println(message);
+            out.flush();
+
+            if (message == "bye") {
+                break;
+            }
         }
+        scanner.close();
+        client_socket.close();
     }
 }
