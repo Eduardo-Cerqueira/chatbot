@@ -21,13 +21,38 @@ public class Menu {
                     System.out.println("Utilisateurs connectés");
                     break;
                 case 2:
-                    System.out.println("Saisissez votre message");
+                    System.out.println("Message publique");
+
+                    int Choix2 = 0;
+                    while (Choix2 != 3) {
+                        System.out.println("1. Envoyer un message");
+                        System.out.println("2. Retourner au menu principal");
+                        System.out.print("Entrez votre choix: ");
+                        Choix2 = scanner.nextInt();
+                    }
                     break;
                 case 3:
-                    System.out.println("Saisissez votre message");
+                    System.out.println("Message privée");
+                    int Choix3 = 0;
+                    while (Choix3 != 3) {
+                        System.out.println("1. Envoyer un message");
+                        System.out.println("2. Retourner au menu principal");
+                        System.out.print("Entrez votre choix:");
+                        Choix3 = scanner.nextInt();
+                    }
                     break;
                 case 4:
-                    System.out.println("Choisissez des utilisateurs");
+                    System.out.println("Créer un groupe");
+                    int Choix4 = 0;
+                    while (Choix4 != 3) {
+                        System.out.println("1. Ajouter un utilisateur");
+                        System.out.println("2. Retirer un utilisateur (admin only)");
+                        System.out.println("3. Quitter le groupe");
+                        System.out.println("Retourner au menu principal");
+                        System.out.print("Entrez votre choix)");
+                        Choix4 = scanner.nextInt();
+                    }
+
                     break;
                 case 5:
                     System.out.println("Au revoir !");
