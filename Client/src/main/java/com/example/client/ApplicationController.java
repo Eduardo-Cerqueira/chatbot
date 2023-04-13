@@ -19,7 +19,7 @@ public class ApplicationController {
 
     @FXML
     protected void login() throws IOException {
-        if (!nicknameField.getText().isEmpty() || !nicknameField.getText().isBlank()){
+        if (!nicknameField.getText().isBlank() || !nicknameField.getText().isEmpty()){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
@@ -32,9 +32,9 @@ public class ApplicationController {
         stage.setScene(scene);
         stage.show();
     }
-        else{
-            errorLabel.setText("Please enter a correct nickname before !");
-            errorLabel.setVisible(true);
+    else{
+        errorLabel.setText("Please enter a correct nickname..");
+        errorLabel.setVisible(true);
         }
     }
 }
