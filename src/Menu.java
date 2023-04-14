@@ -7,6 +7,7 @@ public class Menu {
         int choix = 0;
 
         while (choix != 4) {
+            // Affiche le menu principal avec plusieurs options
             System.out.println("=== Menu ===");
             System.out.println("1. Liste des utilisateurs connectées");
             System.out.println("2. Ecrire un message publique");
@@ -18,9 +19,11 @@ public class Menu {
 
             switch (choix) {
                 case 1:
+                    // Affiche la liste des utilisateurs connectés
                     System.out.println("Utilisateurs connectés");
                     break;
                 case 2:
+                    // Affiche le sous-menu pour écrire un message publique
                     System.out.println("Message publique");
 
                     int Choix2 = 0;
@@ -32,6 +35,7 @@ public class Menu {
                     }
                     break;
                 case 3:
+                    // Affiche le sous-menu pour écrire un message privé
                     System.out.println("Message privée");
                     int Choix3 = 0;
                     while (Choix3 != 3) {
@@ -42,22 +46,26 @@ public class Menu {
                     }
                     break;
                 case 4:
+                    // Affiche le sous-menu pour créer un groupe
                     System.out.println("Créer un groupe");
                     int Choix4 = 0;
                     while (Choix4 != 3) {
                         System.out.println("1. Ajouter un utilisateur");
                         System.out.println("2. Retirer un utilisateur (admin only)");
                         System.out.println("3. Quitter le groupe");
-                        System.out.println("Retourner au menu principal");
+                        System.out.println("4. Retourner au menu principal");
+
                         System.out.print("Entrez votre choix)");
                         Choix4 = scanner.nextInt();
                     }
 
                     break;
                 case 5:
+                    // Quitte le programme si l'utilisateur choisit l'option "se déconnecter"
                     System.out.println("Au revoir !");
                     break;
                 default:
+                    // Affiche un message d'erreur si l'utilisateur choisit une option invalide
                     System.out.println("Choix invalide, veuillez réessayer");
                     break;
             }
@@ -65,7 +73,7 @@ public class Menu {
             System.out.println();
         }
 
+        // Ferme l'objet Scanner pour éviter les fuites de mémoire
         scanner.close();
     }
-
 }
