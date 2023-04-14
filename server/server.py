@@ -1,4 +1,4 @@
-import socket, json, _thread, os
+import socket, json, _thread, os, threading
 from datetime import datetime
 
 class user:
@@ -6,10 +6,14 @@ class user:
     self.username = username
     self.hostname = hostname
 
-def startServer(port):
+host = socket.gethostname()
+
+        
+def startServer(port, host):
     # get the hostname
-    host = socket.gethostname()
+    
     print("Server address is :",host)
+    
 
     server_socket = socket.socket()  # get instance
     # look closely. The bind() function takes tuple as argument
@@ -22,6 +26,7 @@ def startServer(port):
 
     while True:
         conn, address = server_socket.accept()
+        
         if (address != ""):
             log_message("server/server.log", "Connection", address)
             print("Connection from: " + str(address))
@@ -29,26 +34,43 @@ def startServer(port):
             address = ""
 
         # receive data stream. it won't accept data packet greater than 1024 bytes
-        data = conn.recv(1024).decode()
-        if not data:
+        while(True):
+            try:
+                print(users)
+            except IndexError:
+                print("rien")
+                break
+            data = conn.recv(1024).decode()
+            print(conn)
+            if not data:
             # if data is not received break
-            break
-        print("from connected user: " + data)
-        print(data)
-        json_data = json.loads(data)
-        try:
-            checkUser(users, json_data["username"], json_data["hostname"])
-        except KeyError:
-            print("Message don't contain username")
-        break
+                break
+            print("from connected user: " + data)
+            print(data)
+            json_data = json.loads(data)
+            try:
+                checkUser(users, json_data["username"], json_data["hostname"])
+                
+                
+                
+            except KeyError:
+                print("Message don't contain username")
+                break
         #data = input(' -> ')
         #sendMessage(conn, data)  # send data to the client
-    log_message("server/server.log", "Disconnection", last_adress)
-    conn.close()  # close the connection
+        
+        # log_message("server/server.log", "Disconnection", last_adress)
+    # conn.close()  # close the connection
 
 #Thread: https://docs.python.org/3/library/_thread.html
 def newThread(function):
     thread.start_new_thread(function)
+    
+def servprivate(host):
+    data2 = conn.recv(1024).decode()
+    if(data2["private"]= 'private'):
+        host = 
+        pass
 
 def checkUser(users_array, username, hostname):
     for user in users_array:
@@ -57,7 +79,9 @@ def checkUser(users_array, username, hostname):
     print({'status': 200, 'err': "Username doesn't exist !"})
     addUser(users_array, username, hostname)
     print(users_array[0].username)
+    print(users_array)
     return print({'status': 200, 'err': "Username created !"})
+    
 
 
 def addUser(users_array, username, hostname):
@@ -97,8 +121,18 @@ def log_file_manage(log_path):
         with open(os.path.join(log_path), "a") as file_logs:
             file_logs.write(f"{time()} : Server started\n")
             file_logs.close()
+def servprivate():
+    pass
+    groupe = []
+    
+    
 
+    
 if __name__ == '__main__':
     users = []
     log_file_manage("server/server.log", )
     startServer(5000)
+    
+    
+
+    
